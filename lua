@@ -28,7 +28,6 @@ local selectedOption = nil
 FirstSection2:NewDropdown("Select Scripts", "List of scripts we found for you!", {
     "A Dusty Trip",
     "Arsenal",
-    "Realm Rampage",
     "Auto Builder (BABFT)",
     "Azure (Da Hood)",
     "BABFT.EXE (BABFT)",
@@ -44,13 +43,14 @@ FirstSection2:NewDropdown("Select Scripts", "List of scripts we found for you!",
     "Patchma Hub (FE)",
     "Pls Donate (Beg-Bot)",
     "Project Auto (Jailbreak)",
+    "Realm Rampage",
     "Sensation (Jailbreak)",
-    "Tower of Hell",
-    "Tha Bronx"
+    "Tha Bronx",
+    "Tower of Hell"
 }, function(currentOption)
     selectedOption = currentOption
-    print("Selected: " .. currentOption)
 end)
+
 
 
 FirstSection2:NewButton("Execute Selected Script", "ButtonInfo", function()
