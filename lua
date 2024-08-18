@@ -5,7 +5,7 @@ local SecondTab = FirstWindow:NewTab("Player")
 local SecondSection = SecondTab:NewSection("Player")
 local FirstSection = FirstTab:NewSection("Universal Scripts")
 
-FirstSection:NewButton("Fling All (Buggy - Risk Kick in R6 Games)", "Flings all players.", function()
+FirstSection:NewButton("Fling All (Risk Kick in R6 Games)", "Flings all players.", function()
     loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
 end)
 
