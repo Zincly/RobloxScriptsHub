@@ -13,6 +13,10 @@ FirstSection:NewButton("Infinite Yield", "Cmds", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
 
+FirstSection:NewButton("Bypass Chat", "Bypasses most of the chat filter", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua"))()
+end)
+
 FirstSection:NewButton("System Broken", "Just a hub of FE trolling", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script'))()
 end)
@@ -23,6 +27,7 @@ local selectedOption = nil
 
 FirstSection2:NewDropdown("Select Scripts", "List of scripts we found for you!", {
     "A Dusty Trip",
+    "Arsenal",
     "Auto Builder (BABFT)",
     "Azure (Da Hood)",
     "BABFT.EXE (BABFT)",
@@ -49,6 +54,9 @@ FirstSection2:NewButton("Execute Selected Script", "ButtonInfo", function()
         
     elseif selectedOption == "System Broken" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script'))()
+
+    elseif selectedOption == "Arsenal" then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Insertl/QuotasHub/main/BETAv1.3"))()
         
     elseif selectedOption == "BABFT.EXE (BABFT)" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/XRoLLu/UWU/main/BUILD%20A%20BOAT%20FOR%20TREASURE.lua'))()
