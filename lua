@@ -28,20 +28,25 @@ local selectedOption = nil
 FirstSection2:NewDropdown("Select Scripts", "List of scripts we found for you!", {
     "A Dusty Trip",
     "Arsenal",
+    "Realm Rampage",
     "Auto Builder (BABFT)",
     "Azure (Da Hood)",
     "BABFT.EXE (BABFT)",
     "Blox Fruits (Key)",
     "Cat Hub (Pet Sim 99)",
     "Doors",
+    "Fling things and People",
+    "Frontlines (ESP + HBOX)",
     "Jailbreak V5",
     "Nexam (Blade Ball)",
     "Nexus (MM2)",
     "Nexus (MM2 - Beta)",
     "Patchma Hub (FE)",
+    "Pls Donate (Beg-Bot)",
     "Project Auto (Jailbreak)",
     "Sensation (Jailbreak)",
-    "Tower of Hell"
+    "Tower of Hell",
+    "Tha Bronx"
 }, function(currentOption)
     selectedOption = currentOption
     print("Selected: " .. currentOption)
@@ -55,17 +60,33 @@ FirstSection2:NewButton("Execute Selected Script", "ButtonInfo", function()
     elseif selectedOption == "System Broken" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script'))()
 
+    elseif selectedOption == "Realm Rampage" then
+        _G.Key = "Blackking_KEY1548414446447455"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Realm%20Rampage"))()
+
+    elseif selectedOption == "Tha Bronx" then
+        loadstring(game:HttpGet('https://pastebin.com/raw/2ZVL9xGV'))()
+
+    elseif selectedOption == "Pls Donate (Beg-Bot)" then
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/zznefethbxau0/a-m-f/main/ani-moon-fors-new')))()
+
     elseif selectedOption == "Arsenal" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Insertl/QuotasHub/main/BETAv1.3"))()
         
     elseif selectedOption == "BABFT.EXE (BABFT)" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/XRoLLu/UWU/main/BUILD%20A%20BOAT%20FOR%20TREASURE.lua'))()
         
+    elseif selectedOption == "Fling things and People" then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/BlizTBr/scripts/main/FTAP.lua"))()
+
     elseif selectedOption == "Azure (Da Hood)" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Actyrn/Scripts/main/AzureModded"))()
         
     elseif selectedOption == "Cat Hub (Pet Sim 99)" then
         loadstring(game:HttpGet('https://whimper.xyz/cathub.lua'))()
+
+    elseif selectedOption == "Frontlines (ESP + HBOX)" then
+        loadstring(game:HttpGet('https://pastebin.com/raw/pqZrurdG'))()
         
     elseif selectedOption == "Project Auto (Jailbreak)" then
         loadstring(game:HttpGet('http://scripts.projectauto.xyz/AutoRobV4'))()
