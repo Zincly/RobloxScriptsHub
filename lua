@@ -23,19 +23,19 @@ local selectedOption = nil
 
 FirstSection2:NewDropdown("Select Scripts", "List of scripts we found for you!", {
     "A Dusty Trip",
-    "Azure (Da Hood)",
     "Auto Builder (BABFT)",
+    "Azure (Da Hood)",
     "BABFT.EXE (BABFT)",
     "Blox Fruits (Key)",
     "Cat Hub (Pet Sim 99)",
     "Doors",
-    "Project Auto (Jailbreak)",
     "Jailbreak V5",
-    "Sensation (Jailbreak)",
     "Nexam (Blade Ball)",
     "Nexus (MM2)",
     "Nexus (MM2 - Beta)",
     "Patchma Hub (FE)",
+    "Project Auto (Jailbreak)",
+    "Sensation (Jailbreak)",
     "Tower of Hell"
 }, function(currentOption)
     selectedOption = currentOption
