@@ -6,7 +6,7 @@ local SecondSection = SecondTab:NewSection("Player")
 local FirstSection = FirstTab:NewSection("Universal Scripts")
 
 FirstSection:NewButton("Fling All (Risk Kick in R6 Games)", "Flings all players.", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
+    loadstring(game:HttpGet("https://pastebin.com/raw/i5BbMHRM"))()
 end)
 
 FirstSection:NewButton("Infinite Yield", "Cmds", function()
