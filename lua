@@ -189,6 +189,10 @@ SecondSection:NewToggle("Spin", "Toggle spinning on or off", function(state)
     end
 end)
 
+FirstSection2:NewKeybind("F to close", "KeybindInfo", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
+
 local ThirdTab = FirstWindow:NewTab("Credits")
 local ThirdSection = ThirdTab:NewSection("Owned by RSC (Roblox Scripting Community)")
 ThirdSection:NewLabel("Developed by Guy and Dirt")
