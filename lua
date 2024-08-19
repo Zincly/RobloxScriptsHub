@@ -21,7 +21,7 @@ local Window = Rayfield:CreateWindow({
       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"1#RSCtestkeySecret_1", "bruh what is this random ahh key"}
+      Key = {"1#RSC#testkeySecret_987#435870#9284387#49834", "bruh what is this random ahh key"}
    }
 })
 
