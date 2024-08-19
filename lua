@@ -84,6 +84,18 @@ local Button = FirstTab:CreateButton({
    -- The function that takes place when the button is pressed
    end,
 })
+
+local Button = FirstTab:CreateButton({
+   Name = "BloxBurg (Auto Farm)",
+   Callback = function()
+getgenv().HairDresserStation = "3"
+getgenv().ScriptJob = "HairDresser"
+getgenv().ScriptKey = "3CKLJoyl6E9ahPL0l3LLz0QscNmhhp"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SurgeDid/Blockburg/main/loader.lua"))();
+   end,
+})
+
+
 local Button = FirstTab:CreateButton({
    Name = "Arsenal",
    Callback = function()
