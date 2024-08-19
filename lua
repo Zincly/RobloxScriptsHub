@@ -199,5 +199,19 @@ local Button = FirstTab:CreateButton({
    Callback = function()
    loadstring(game:HttpGet("https://pastebin.com/raw/xmNwdeYm"))()
    -- The function that takes place when the button is pressed
+
+local Slider = ThirdTab:CreateSlider({
+   Name = "Walkspeed",
+   Range = {0, 500},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(V)
+                  game.Players.LocalPlayer.Humanoid.WalkSpeed = V
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
    end,
 })
