@@ -4,7 +4,7 @@ local Window = Library.CreateLib("Key System", "BloodTheme")
 local Tab = Window:NewTab("Key Required")
 local Section = Tab:NewSection("Get Key")
 
-_G.Key = "RSC#BETA-91213"
+_G.Key = "RSC-PRIVATE-KEY"
 
 Section:NewButton("Copy Script Link", "Paste link into browser", function()
     setclipboard("https://workink.net/1VXp/m007rv77")
