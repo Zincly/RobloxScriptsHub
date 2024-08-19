@@ -26,42 +26,14 @@ local Window = Rayfield:CreateWindow({
 })
 
 local FirstTab = Window:CreateTab("Scripts", 4483362458) -- Title, Image
-local SecondTab = Window:CreateTab("Hubs", 4483362458) -- Title, Image
+local ForthTab = Window:CreateTab("Universal", 4483362458)
 local ThirdTab = Window:CreateTab("Player", 4483362458)
-local ForthTab = Window:CreateTab("Universal", 4483362458) -- Title, Image -- Title, Image
+ -- Title, Image -- Title, Image -- Title, Image
 local FifthTab = Window:CreateTab("Settings", 4483362458) -- Title, Image -- Title, Image
 local SixthTab = Window:CreateTab("Credits", 4483362458) -- Title, Image -- Title, Image
 
 local Section = FirstTab:CreateSection("Universal Scripts")
 
-local Button = FirstTab:CreateButton({
-   Name = "Infinite Yield",
-   Callback = function()
-   loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "System Broken",
-   Callback = function()
-   loadstring(game:HttpGet('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script'))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Fling All",
-   Callback = function()
-   loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Chat Bypass",
-   Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/hellohellohell012321/KAWAII-BYPASS/main/kawaii-bypass",true))()
-   -- The function that takes place when the button is pressed
-   end,
-})
 local Button = FirstTab:CreateButton({
    Name = "The Bronx",
    Callback = function()
@@ -200,18 +172,76 @@ local Button = FirstTab:CreateButton({
    loadstring(game:HttpGet("https://pastebin.com/raw/xmNwdeYm"))()
    -- The function that takes place when the button is pressed
 
+   end,
+})
 local Slider = ThirdTab:CreateSlider({
-   Name = "Walkspeed",
-   Range = {0, 500},
+   Name = "WalkSpeed",
+   Range = {16, 250},
    Increment = 1,
    Suffix = "Speed",
    CurrentValue = 10,
    Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(V)
-                  game.Players.LocalPlayer.Humanoid.WalkSpeed = V
+   Callback = function(v)
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
    -- The function that takes place when the slider changes
    -- The variable (Value) is a number which correlates to the value the slider is currently at
    end,
 })
+local Slider = ThirdTab:CreateSlider({
+   Name = "JumpPower",
+   Range = {50, 500},
+   Increment = 1,
+   Suffix = "JumpPower",
+   CurrentValue = 1,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(j)
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = j
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+local Button = ThirdTab:CreateButton({
+   Name = "Reset WalkSpeed",
+   Callback = function()
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+   -- The function that takes place when the button is pressed
+
+   end,
+})
+local Button = ThirdTab:CreateButton({
+   Name = "Reset JumpPower",
+   Callback = function()
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = 16
+   -- The function that takes place when the button is pressed
+
+   end,
+})
+
+local Button = ForthTab:CreateButton({
+   Name = "Infinite Yield",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = ForthTab:CreateButton({
+   Name = "System Broken",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = ForthTab:CreateButton({
+   Name = "Fling All",
+   Callback = function()
+   loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = ForthTab:CreateButton({
+   Name = "Chat Bypass",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/hellohellohell012321/KAWAII-BYPASS/main/kawaii-bypass",true))()
+   -- The function that takes place when the button is pressed
    end,
 })
