@@ -1,0 +1,45 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Key System", "BloodTheme")
+
+local Tab = Window:NewTab("Key Required")
+local Section = Tab:NewSection("Get Key")
+
+_G.Key = "RSC#BETA-91213"
+
+Section:NewButton("Copy Script Link", "Paste link into browser", function()
+    setclipboard("https://workink.net/1VXp/m007rv77")
+end)
+
+local KeyLabel = Section:NewLabel("Enter your Key")
+local KeyInput = Section:NewTextBox("Key", "Key", function(txt)
+    KeyLabel:UpdateLabel("Key > ".. txt)
+    _G.Key = txt
+end)
+
+_G.CheckKey = false
+local OutputLabel = Section:NewLabel("")
+
+local function CheckKey()
+    if _G.CheckKey == true then
+        return
+    end
+
+    local response = game:HttpGet("https://redirect-api.work.ink/tokenValid/" .. _G.Key .. "?linkId=m007rv77")
+    local keyData = game:GetService("HttpService"):JSONDecode(response)
+
+    if keyData.valid == false then
+        OutputLabel:UpdateLabel("Key is Incorrect")
+        return
+    end
+
+    _G.CheckKey = true
+    local script = loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/main/lua'))()
+    if script then
+        script()
+        Library:Destroy()
+    else
+        OutputLabel:UpdateLabel()
+    end
+end
+
+Section:NewButton("Submit Key", "Submit the entered key", CheckKey)
