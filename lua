@@ -19,9 +19,9 @@ local Window = Rayfield:CreateWindow({
       Subtitle = "Key System",
       Note = "https://work.ink/1VXp/m007rv77",
       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"1_RSCtestkeypayed_1", "bruh what is this random ahh key"}
+      Key = {"1#RSCtestkeySecret_1", "bruh what is this random ahh key"}
    }
 })
 
