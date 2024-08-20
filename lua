@@ -11,17 +11,17 @@ local Window = Rayfield:CreateWindow({
    Discord = {
       Enabled = true,
       Invite = "CAJwVQcm6n", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+      RememberJoins = false -- Set this to false to make them join the discord every time they load it up
    },
    KeySystem = true, -- Set this to true to use our key system
    KeySettings = {
       Title = "Key System",
-      Subtitle = "Key System",
-      Note = "https://work.ink/1VXp/m007rv77",
+      Subtitle = "You must enter the key in order to use our hub.",
+      Note = "https://workink.net/1VXp/m007rv77",
       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"1#RSC#testkeySecret_987#435870#9284387#49834", "bruh what is this random ahh key"}
+      Key = {"RSC-KEY#A9834Bn02", "PrivateStaffKey"}
    }
 })
 
@@ -32,47 +32,42 @@ local ThirdTab = Window:CreateTab("Player", 4483362458)
 local FifthTab = Window:CreateTab("Settings", 4483362458) -- Title, Image -- Title, Image
 local SixthTab = Window:CreateTab("Credits", 4483362458) -- Title, Image -- Title, Image
 
-local Section = FirstTab:CreateSection("Universal Scripts")
-
-local Button = FirstTab:CreateButton({
-   Name = "The Bronx",
-   Callback = function()
-   loadstring(game:HttpGet('https://pastebin.com/raw/2ZVL9xGV'))()
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Please Donate (Beg-Bot)",
-   Callback = function()
-   loadstring(game:HttpGet(('https://raw.githubusercontent.com/zznefethbxau0/a-m-f/main/ani-moon-fors-new')))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = FirstTab:CreateButton({
-   Name = "Realm Rampage",
-   Callback = function()
-   _G.Key = "Blackking_KEY1548414446447455"
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Realm%20Rampage"))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = FirstTab:CreateButton({
-   Name = "BloxBurg (Auto Farm)",
-   Callback = function()
-getgenv().HairDresserStation = "3"
-getgenv().ScriptJob = "HairDresser"
-getgenv().ScriptKey = "3CKLJoyl6E9ahPL0l3LLz0QscNmhhp"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SurgeDid/Blockburg/main/loader.lua"))();
-   end,
-})
-
-
+local Section = FirstTab:CreateSection("A - Games")
 local Button = FirstTab:CreateButton({
    Name = "Arsenal",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/Insertl/QuotasHub/main/BETAv1.3"))()
    -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Apeirophobia (Horror)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Sussy-Tech/Scripts/main/RunningFromTheInternet.lua"))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "A Dusty Trip",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/artemy133563/Utilities/main/ADustyTrip",true))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+
+
+
+local Section = FirstTab:CreateSection("B - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "BloxBurg (Auto Farm)",
+   Callback = function()
+getgenv().HairDresserStation = "1"
+getgenv().ScriptJob = "HairDresser"
+getgenv().ScriptKey = "3CKLJoyl6E9ahPL0l3LLz0QscNmhhp"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SurgeDid/Blockburg/main/loader.lua"))();
    end,
 })
 local Button = FirstTab:CreateButton({
@@ -82,45 +77,11 @@ local Button = FirstTab:CreateButton({
    -- The function that takes place when the button is pressed
    end,
 })
+
 local Button = FirstTab:CreateButton({
-   Name = "Fling things and people",
+   Name = "BABFT Auto Builder",
    Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/BlizTBr/scripts/main/FTAP.lua"))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Da Hood (Trash)",
-   Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Actyrn/Scripts/main/AzureModded"))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Pet Sim 99",
-   Callback = function()
-   loadstring(game:HttpGet('https://whimper.xyz/cathub.lua'))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Frontlines (ESP + HBOX)",
-   Callback = function()
-   loadstring(game:HttpGet('https://pastebin.com/raw/pqZrurdG'))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Jailbreak",
-   Callback = function()
-   loadstring(game:HttpGet('https://api.luarmor.net/files/v3/loaders/730854e5b6499ee91deb1080e8e12ae3.lua'))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-local Button = FirstTab:CreateButton({
-   Name = "Doors",
-   Callback = function()
-   loadstring(game:HttpGet('https://pastebin.com/raw/aTYYyp8u'))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/max2007killer/auto-build-not-limit/main/buildaboatv2obs.txt"))()
    -- The function that takes place when the button is pressed
    end,
 })
@@ -132,37 +93,199 @@ local Button = FirstTab:CreateButton({
    end,
 })
 local Button = FirstTab:CreateButton({
-   Name = "BABFT Auto Builder",
+   Name = "BladeBall",
    Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/max2007killer/auto-build-not-limit/main/buildaboatv2obs.txt"))()
+   loadstring(game:HttpGet('https://api.luarmor.net/files/v3/loaders/6af56c1753ac6679dee3acbd1fd952e5.lua'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+local Section = FirstTab:CreateSection("C - Games")
+local Button = FirstTab:CreateButton({
+   Name = "Car Dealership Tycoon",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/mikeblazex/Mikeexc7491/main/Mike99118",true))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = FirstTab:CreateButton({
+   Name = "Car Crushers 2 (Auto-Farm)",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/SenhorLDS/ProjectLDSHUB/main/OfficialScript'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+
+local Section = FirstTab:CreateSection("D - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Da Hood (Buggy)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Actyrn/Scripts/main/AzureModded"))()
    -- The function that takes place when the button is pressed
    end,
 })
 local Button = FirstTab:CreateButton({
-   Name = "A Dusty Trip",
+   Name = "Dungeon Quest",
    Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/artemy133563/Utilities/main/ADustyTrip",true))()
+   loadstring(game:HttpGet("https://pastebin.com/raw/GE4U1gmi"))()
    -- The function that takes place when the button is pressed
    end,
 })
 local Button = FirstTab:CreateButton({
-   Name = "MM2",
+   Name = "Doors",
    Callback = function()
-   loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/6af56c1753ac6679dee3acbd1fd952e5.lua"))()
+   loadstring(game:HttpGet('https://pastebin.com/raw/aTYYyp8u'))()
    -- The function that takes place when the button is pressed
    end,
 })
 local Button = FirstTab:CreateButton({
-   Name = "MM2 Beta",
+   Name = "DeathBall",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Death-Bal/main/Op-Script-by-me"))() 
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+
+
+
+
+local Section = FirstTab:CreateSection("E - Games")
+local Button = FirstTab:CreateButton({
+   Name = "Eat the World",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Kenniel123/Eat-the-World-script/main/Eat%20the%20world%20Script"))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+
+
+
+
+local Section = FirstTab:CreateSection("F - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Fling things and people",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/BlizTBr/scripts/main/FTAP.lua"))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Frontlines (ESP + HBOX)",
+   Callback = function()
+   loadstring(game:HttpGet('https://pastebin.com/raw/pqZrurdG'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+local Section = FirstTab:CreateSection("G - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Grand Piece Online: Auto Farm",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/AdelOnTheTop/Adel-Hub/main/Main.lua"))()
+   end,
+})
+
+local Button = FirstTab:CreateButton({
+   Name = "Ghost Simulator",
+   Callback = function()
+   loadstring(game:HttpGet("https://pastebin.com/raw/P8K3QGZ5"))()
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Gym League",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Athergaming/Roblox-Gym-League-Script/main/AtherHub%20Gym%20League%20V1_5.lua"))() 
+   end,
+})
+
+local Section = FirstTab:CreateSection("H - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Hide and Seek Extreme [Find All Players, Grab Coins, Esp]",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Bebo-Mods/BeboScripts/main/HideAndSeekExtreme.lua"))()
+   end,
+})
+
+local Section = FirstTab:CreateSection("I - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Island Royale",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/angeld23/raw-text-host/master/Temporal.lua", true))()
+   end,
+})
+
+
+
+local Section = FirstTab:CreateSection("J - Games")
+local Button = FirstTab:CreateButton({
+   Name = "Jailbreak (Sensation)",
+   Callback = function()
+   loadstring(game:HttpGet('https://api.luarmor.net/files/v3/loaders/730854e5b6499ee91deb1080e8e12ae3.lua'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Jailbreak (Project Auto V4)",
+   Callback = function()
+   loadstring(game:HttpGet('https://scripts.projectauto.xyz/AutoRobV4'))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+local Section = FirstTab:CreateSection("K - Games")
+local Section = FirstTab:CreateSection("L - Games")
+local Section = FirstTab:CreateSection("M - Games")
+local Button = FirstTab:CreateButton({
+   Name = "MM2 (Nexus)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/loadstring"))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "MM2 (Nexus-Beta)",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus-BETA/main/mm2"))()
    -- The function that takes place when the button is pressed
    end,
 })
+
+local Section = FirstTab:CreateSection("N - Games")
+local Section = FirstTab:CreateSection("O - Games")
+local Section = FirstTab:CreateSection("P - Games")
 local Button = FirstTab:CreateButton({
-   Name = "Tower of Hell",
+   Name = "Pls Donate (Beg-Bot)",
    Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/2dgeneralspam1/scripts-and-stuff/master/scripts/garfield%20hub", true))()
+   loadstring(game:HttpGet(('https://raw.githubusercontent.com/zznefethbxau0/a-m-f/main/ani-moon-fors-new')))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Prison Life",
+   Callback = function()
+   loadstring(game:HttpGet("https://pastebin.com/raw/Wa3uidQr"))() 
+   -- The function that takes place when the button is pressed
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Pet Simulator 99",
+   Callback = function()
+   loadstring(game:HttpGet('https://whimper.xyz/cathub.lua'))()
    -- The function that takes place when the button is pressed
    end,
 })
@@ -174,6 +297,75 @@ local Button = FirstTab:CreateButton({
 
    end,
 })
+
+local Section = FirstTab:CreateSection("Q - Games")
+local Section = FirstTab:CreateSection("R - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Realm Rampage",
+   Callback = function()
+   _G.Key = "Blackking_KEY1548414446447455"
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Realm%20Rampage"))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+
+
+
+local Section = FirstTab:CreateSection("S - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "Sharkbite 1",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/Aboahaogsigsigaivva/__Scripts/__Main/__Code/__SharkBite1.lua'))('Loader.lua')
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Sharkbite 2",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/JerrymiahPM/SharkRipper/main/main.lua"))()
+   end,
+})
+local Section = FirstTab:CreateSection("T - Games")
+
+local Button = FirstTab:CreateButton({
+   Name = "The Bronx",
+   Callback = function()
+   loadstring(game:HttpGet('https://pastebin.com/raw/2ZVL9xGV'))()
+   end,
+})
+local Button = FirstTab:CreateButton({
+   Name = "Tower of Hell (Detectable)",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/2dgeneralspam1/scripts-and-stuff/master/scripts/garfield%20hub", true))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Section = FirstTab:CreateSection("U - Games")
+local Section = FirstTab:CreateSection("V - Games")
+local Section = FirstTab:CreateSection("W - Games")
+local Section = FirstTab:CreateSection("X - Games")
+local Section = FirstTab:CreateSection("Y - Games")
+local Section = FirstTab:CreateSection("Z - Games")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 local Slider = ThirdTab:CreateSlider({
    Name = "WalkSpeed",
    Range = {16, 250},
@@ -217,6 +409,8 @@ local Button = ThirdTab:CreateButton({
    end,
 })
 
+
+local Section = ForthTab:CreateSection("Universal Scripts")
 local Button = ForthTab:CreateButton({
    Name = "Infinite Yield",
    Callback = function()
@@ -231,6 +425,10 @@ local Button = ForthTab:CreateButton({
    -- The function that takes place when the button is pressed
    end,
 })
+
+
+
+local Section = ForthTab:CreateSection("FE Trolling")
 local Button = ForthTab:CreateButton({
    Name = "Fling All",
    Callback = function()
