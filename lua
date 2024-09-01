@@ -285,7 +285,7 @@ local Button = FirstTab:CreateButton({
 local Button = FirstTab:CreateButton({
    Name = "Pet Simulator 99",
    Callback = function()
-   loadstring(game:HttpGet('https://whimper.xyz/cathub.lua'))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/cracklua/cracks/m/zaphub"))()
    -- The function that takes place when the button is pressed
    end,
 })
