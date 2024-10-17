@@ -9,7 +9,7 @@ if _G.AutofarmSettings then
 	SettingsAutofarm = _G.AutofarmSettings
 else
 	_G.AutofarmSettings = {}
-	SettingsAutofarm = {AntiAfk = true, DelayFarm = 3}
+	SettingsAutofarm = {AntiAfk = true, DelayFarm = 1.5}
 end
 if _G.AutoFarmMM2IsLoaded then return end
 _G.AutoFarmMM2IsLoaded = true
