@@ -1,4 +1,4 @@
-local teleportPosition = Vector3.new(104, 175, 38)
+local teleportPosition = Vector3.new(120, 250, 50)
 local player = game.Players.LocalPlayer
 
 local function teleportPlayer()
