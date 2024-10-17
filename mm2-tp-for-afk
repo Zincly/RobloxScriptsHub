@@ -1,4 +1,4 @@
-local teleportPosition = Vector3.new(1000, 100, 1000)
+local teleportPosition = Vector3.new(1000, 5000, 1000)
 local player = game.Players.LocalPlayer  -- Get the local player
 local character = player.Character or player.CharacterAdded:Wait()
 
@@ -10,5 +10,5 @@ end
 
 while true do
     teleportPlayer()
-    wait(0.1)
+    wait(0.01)
 end
