@@ -10,5 +10,5 @@ end
 
 while true do
     teleportPlayer()
-    wait(1)  -- Wait for 1 second
+    wait(0.1)
 end
