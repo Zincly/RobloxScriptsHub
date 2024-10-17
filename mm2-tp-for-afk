@@ -11,11 +11,11 @@ end
 player.CharacterAdded:Connect(function()
     while true do
         teleportPlayer()
-        wait(1)
+        wait(0.01)
     end
 end)
 
 while true do
     teleportPlayer()
-    wait(1)
+    wait(0.01)
 end
