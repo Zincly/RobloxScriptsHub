@@ -1,21 +1,15 @@
-local teleportPosition = Vector3.new(120, 250, 50)
-local player = game.Players.LocalPlayer
+local player = game.Players.LocalPlayer  -- Get the local player
+local resetInterval = 60  -- Time in seconds between each reset
 
-local function teleportPlayer()
-    local character = player.Character or player.CharacterAdded:Wait()
-    if character and character:FindFirstChild("HumanoidRootPart") then
-        character.HumanoidRootPart.CFrame = CFrame.new(teleportPosition)
+-- Function to reset the player
+local function resetPlayer()
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.Health = 0  -- Reset the player by setting health to 0
     end
 end
 
-player.CharacterAdded:Connect(function()
-    while true do
-        teleportPlayer()
-        wait(0.01)
-    end
-end)
-
+-- Loop to reset the player every 60 seconds
 while true do
-    teleportPlayer()
-    wait(0.01)
+    wait(resetInterval)  -- Wait for 60 seconds
+    resetPlayer()  -- Reset the player
 end
