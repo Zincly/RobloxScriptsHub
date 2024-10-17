@@ -10,6 +10,6 @@ end
 
 -- Loop to reset the player every 60 seconds
 while true do
-    wait(resetInterval)  -- Wait for 60 seconds
     resetPlayer()  -- Reset the player
+    wait(resetInterval)  -- Wait for 60 seconds
 end
