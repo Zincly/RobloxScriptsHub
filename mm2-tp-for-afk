@@ -1,15 +1,339 @@
-local player = game.Players.LocalPlayer  -- Get the local player
-local resetInterval = 60  -- Time in seconds between each reset
+-- Services
+local TweenService = game:GetService("TweenService")
 
--- Function to reset the player
-local function resetPlayer()
-    if player.Character and player.Character:FindFirstChild("Humanoid") then
-        player.Character.Humanoid.Health = 0  -- Reset the player by setting health to 0
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+SettingsAutofarm = {}
+if _G.AutofarmSettings then
+	SettingsAutofarm = _G.AutofarmSettings
+else
+	_G.AutofarmSettings = {}
+	SettingsAutofarm = {AntiAfk = true, DelayFarm = 3}
+end
+if _G.AutoFarmMM2IsLoaded then return end
+_G.AutoFarmMM2IsLoaded = true
+Player = game.Players.LocalPlayer
+Players = game.Players
+CoreGui = game.CoreGui
+GuiLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/elfandtears/GuiLibrary/main/source.lua"))()
+RunService = game:GetService("RunService")
+CoinCollectedEvent = game.ReplicatedStorage.Remotes.Gameplay.CoinCollected
+RoundStartEvent = game.ReplicatedStorage.Remotes.Gameplay.RoundStart
+RoundEndEvent = game.ReplicatedStorage.Remotes.Gameplay.RoundEndFade
+RandomNameFunction = GuiLibrary.RandomName
+MainGui = GuiLibrary.ScreenGUI({
+	Name = RandomNameFunction(),
+	ResetOnSpawn = false,
+	Parent = CoreGui
+})
+MainFrame = GuiLibrary.Frame({
+	Name = RandomNameFunction(),
+	AnchorPoint = Vector2.new(.5, .5),
+	BackgroundColor3 = Color3.new(1, 0.6, 0.2),
+	Position = UDim2.new(.5, 0, .5, 0),
+	Size = UDim2.new(0.131, 0, 0.413, 0),
+	ZIndex = 2,
+	Parent = MainGui,
+	Draggable_ = true
+})
+MainFrameBorder = GuiLibrary.Frame({
+	Name = RandomNameFunction(),
+	AnchorPoint = Vector2.new(.5, .5),
+	BackgroundColor3 = Color3.new(0, 0, 0),
+	Position = UDim2.new(.5, 0, .5, 0),
+	Size = UDim2.new(0.138, 0, 0.434, 0),
+	ZIndex = 1,
+	Parent = MainGui,
+	attach = MainFrame
+})
+MainFrameUiCorner = GuiLibrary.UICorner({
+	Name = RandomNameFunction(),
+	CornerRadius = UDim.new(0, 12),
+	Parent = MainFrame
+})
+MainFrameBorderUiCorner = GuiLibrary.UICorner({
+	Name = RandomNameFunction(),
+	CornerRadius = UDim.new(0, 12),
+	Parent = MainFrameBorder
+})
+CloseMainFrameButton = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	BackgroundTransparency = 1,
+	Position = UDim2.new(0.8, 0, 0, 0),
+	Size = UDim2.new(0.2, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "X",
+	ZIndex = 2,
+	TextColor3 = Color3.new(1, 0, 0),
+	TextScaled = true,
+	Parent = MainFrame
+})
+NameTextLabel = GuiLibrary.TextLabel({
+	Name = RandomNameFunction(),
+	BackgroundTransparency = 1,
+	Position = UDim2.new(0, 0, 0, 0),
+	Size = UDim2.new(0.8, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Autofarm",
+	ZIndex = 2,
+	TextColor3 = Color3.new(0, 0, 0),
+	TextScaled = true,
+	Parent = MainFrame
+})
+AntiAfkButton = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	BackgroundColor3 = Color3.new(0.9, 1, 0),
+	BorderColor3 = Color3.new(1, 1, 1),
+	BorderSizePixel = 2,
+	Position = UDim2.new(0.1, 0, 0.125, 0),
+	Size = UDim2.new(0.8, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Anti afk",
+	ZIndex = 2,
+	TextColor3 = Color3.new(0, 0, 0),
+	TextScaled = true,
+	Parent = MainFrame
+})
+StartAutofarmButton = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	BackgroundColor3 = Color3.new(0.9, 1, 0),
+	BorderColor3 = Color3.new(1, 1, 1),
+	BorderSizePixel = 2,
+	Position = UDim2.new(0.1, 0, 0.282, 0),
+	Size = UDim2.new(0.8, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Start",
+	ZIndex = 2,
+	TextColor3 = Color3.new(0, 0, 0),
+	TextScaled = true,
+	Parent = MainFrame
+})
+Disable3DRenderingButton = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	BackgroundColor3 = Color3.new(0.9, 1, 0),
+	BorderColor3 = Color3.new(1, 1, 1),
+	BorderSizePixel = 2,
+	Position = UDim2.new(0.1, 0, 0.438, 0),
+	Size = UDim2.new(0.8, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Disable 3D rendering",
+	TextColor3 = Color3.new(0, 0, 0),
+	TextScaled = true,
+	ZIndex = 2,
+	Parent = MainFrame
+})
+ImproveFPSButton = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	BackgroundColor3 = Color3.new(0.9, 1, 0),
+	BorderColor3 = Color3.new(1, 1, 1),
+	BorderSizePixel = 2,
+	Position = UDim2.new(0.1, 0, 0.595, 0),
+	Size = UDim2.new(0.8, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Improve FPS",
+	ZIndex = 2,
+	TextColor3 = Color3.new(0, 0, 0),
+	TextScaled = true,
+	Parent = MainFrame
+})
+CoinTypeButton = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	BackgroundColor3 = Color3.new(0.9, 1, 0),
+	BorderColor3 = Color3.new(1, 1, 1),
+	BorderSizePixel = 2,
+	Position = UDim2.new(0.1, 0, 0.757, 0),
+	Size = UDim2.new(0.8, 0, 0.125, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Farm coin type: Candy",
+	ZIndex = 2,
+	TextColor3 = Color3.new(0, 0, 0),
+	TextScaled = true,
+	Parent = MainFrame
+})
+OpenAutofarmGui = GuiLibrary.TextButton({
+	Name = RandomNameFunction(),
+	AnchorPoint = Vector2.new(.5, .5),
+	BackgroundColor3 = Color3.new(1, 0.333333, 0.498039),
+	BorderColor3 = Color3.new(0, 0, 0),
+	BorderSizePixel = 2,
+	BorderMode = Enum.BorderMode.Inset,
+	Position = UDim2.new(0.5, 0, 0.028, 0),
+	Size = UDim2.new(0.104, 0, 0.052, 0),
+	["Font"] = Enum.Font.FredokaOne,
+	Text = "Open autofarm gui",
+	ZIndex = 4,
+	TextColor3 = Color3.new(1, 1, 1),
+	TextScaled = true,
+	Visible = false,
+	Parent = MainGui
+})
+
+--from infinity yield lol
+AntiAfkState = false
+function AntiAFK()
+	local GC = getconnections or get_signal_cons
+	if GC then
+		for i,v in pairs(GC(Player.Idled)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			elseif v["Disconnect"] then
+				v["Disconnect"](v)
+			end
+		end
+	else
+		local VirtualUser = cloneref(game:GetService("VirtualUser"))
+		Players.LocalPlayer.Idled:Connect(function()
+			VirtualUser:CaptureController()
+			VirtualUser:ClickButton2(Vector2.new())
+		end)
+	end
+end
+
+--yeah yeah this button do nothing, you cant turn off anti afk
+function AntiAFKButton()
+	if not AntiAfkState then
+		AntiAfkState = true
+		AntiAfkButton.TextColor3 = Color3.new(0, 1, 0)
+		AntiAFK()
+	else
+		AntiAfkState = false
+		AntiAfkButton.TextColor3 = Color3.new(1, 1, 1)
+	end
+end
+AutofarmStarted = false
+
+function StartAutofarm()
+	if not AutofarmStarted then
+		AutofarmStarted = true
+		StartAutofarmButton.TextColor3 = Color3.new(0, 1, 0)
+		FarmCoins()
+	else
+		AutofarmStarted = false
+		StartAutofarmButton.TextColor3 = Color3.new(1, 1, 1)
+	end
+end
+
+Disable3DRenderingState = false
+function Disable3DRendering()
+	if not Disable3DRenderingState then
+		Disable3DRenderingState = true
+		Disable3DRenderingButton.TextColor3 = Color3.new(0, 1, 0)
+		RunService:Set3dRenderingEnabled(false)
+	else
+		Disable3DRenderingState = false
+		Disable3DRenderingButton.TextColor3 = Color3.new(1, 1, 1)
+		RunService:Set3dRenderingEnabled(true)
+	end
+end
+
+ImproveFPSState = false
+function ImproveFPS()
+	if not ImproveFPSState then
+		ImproveFPSState = true
+		ImproveFPSButton.TextColor3 = Color3.new(0, 1, 0)
+		_G.ImproveFPS = true
+		for _,v in pairs(game:GetDescendants()) do
+			if v:IsA("BasePart") or v:IsA("Decal") then
+				v.Transparency = 1
+			end
+		end
+	else
+		ImproveFPSState = false
+		ImproveFPSButton.TextColor3 = Color3.new(1, 1, 1)
+		_G.ImproveFPS = false
+		for _,v in pairs(game:GetDescendants()) do
+			if v:IsA("BasePart") or v:IsA("Decal") then
+				v.Transparency = 0
+			end
+		end
+	end
+end
+
+CoinType = "Candy"
+function ToggleCoinType()
+	if CoinType == "Candy" then
+		CoinType = "Coin"
+		CoinTypeButton.Text = "Farm coin type: Coin"
+	else
+		CoinType = "Candy"
+		CoinTypeButton.Text = "Farm coin type: Candy"
+	end
+end
+
+-- Noclip functionality
+NoclipState = false
+function Noclip()
+    local character = Player.Character
+    if character then
+        for _, part in pairs(character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
     end
 end
 
--- Loop to reset the player every 60 seconds
-while true do
-    resetPlayer()  -- Reset the player
-    wait(resetInterval)  -- Wait for 60 seconds
+function NoclipToggle()
+    if not NoclipState then
+        NoclipState = true
+        RunService.Stepped:Connect(Noclip)
+    else
+        NoclipState = false
+        -- Optionally disconnect the noclip function if necessary
+    end
 end
+
+function FarmCoins()
+	while AutofarmStarted do
+		-- Look for coins or candy depending on CoinType
+		local coins = workspace:FindFirstChild(CoinType)
+		if coins then
+			for _, coin in pairs(coins:GetChildren()) do
+				-- Move to the coin smoothly using tweening
+				local humanoidRootPart = Player.Character:FindFirstChild("HumanoidRootPart")
+				if humanoidRootPart then
+					local goal = {}
+					goal.Position = coin.Position
+
+					local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+					local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
+					tween:Play()
+
+					-- Wait for the tween to finish
+					tween.Completed:Wait()
+
+					-- Simulate collecting the coin
+					CoinCollectedEvent:FireServer(coin)
+				end
+				wait(SettingsAutofarm.DelayFarm)
+			end
+		end
+		wait(1) -- Wait between each cycle to avoid overload
+	end
+end
+
+-- Event listeners
+CloseMainFrameButton.MouseButton1Click:Connect(function()
+	MainGui:Destroy()
+	_G.AutoFarmMM2IsLoaded = false
+end)
+
+AntiAfkButton.MouseButton1Click:Connect(AntiAFKButton)
+StartAutofarmButton.MouseButton1Click:Connect(StartAutofarm)
+Disable3DRenderingButton.MouseButton1Click:Connect(Disable3DRendering)
+ImproveFPSButton.MouseButton1Click:Connect(ImproveFPS)
+CoinTypeButton.MouseButton1Click:Connect(ToggleCoinType)
+OpenAutofarmGui.MouseButton1Click:Connect(function()
+	MainGui.Enabled = not MainGui.Enabled
+end)
+
+-- Start with GUI hidden, can be toggled by the OpenAutofarmGui button
+MainGui.Enabled = false
+
+-- Anti-AFK start by default
+AntiAFK()
+
+-- Prevent multiple script instances
+_G.AutoFarmMM2IsLoaded = true
+
