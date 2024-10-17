@@ -1,6 +1,3 @@
--- Services
-local TweenService = game:GetService("TweenService")
-
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
@@ -9,7 +6,7 @@ if _G.AutofarmSettings then
 	SettingsAutofarm = _G.AutofarmSettings
 else
 	_G.AutofarmSettings = {}
-	SettingsAutofarm = {AntiAfk = true, DelayFarm = 1.5}
+	SettingsAutofarm = {AntiAfk = true, DelayFarm = 1.1}
 end
 if _G.AutoFarmMM2IsLoaded then return end
 _G.AutoFarmMM2IsLoaded = true
@@ -201,139 +198,218 @@ function AntiAFKButton()
 		AntiAfkButton.TextColor3 = Color3.new(1, 1, 1)
 	end
 end
-AutofarmStarted = false
 
-function StartAutofarm()
+AutofarmStarted = false
+function StartAutofarmButtonC()
 	if not AutofarmStarted then
 		AutofarmStarted = true
+		AutofarmIN = true
 		StartAutofarmButton.TextColor3 = Color3.new(0, 1, 0)
-		FarmCoins()
 	else
 		AutofarmStarted = false
 		StartAutofarmButton.TextColor3 = Color3.new(1, 1, 1)
 	end
 end
 
-Disable3DRenderingState = false
-function Disable3DRendering()
-	if not Disable3DRenderingState then
-		Disable3DRenderingState = true
-		Disable3DRenderingButton.TextColor3 = Color3.new(0, 1, 0)
+--Disable your 3D rendering for improve your fps
+D3RenderingDisabled = false
+function Disabl3dRender()
+	if not D3RenderingDisabled then
+		D3RenderingDisabled = true
 		RunService:Set3dRenderingEnabled(false)
+		Disable3DRenderingButton.TextColor3 = Color3.new(0, 1, 0)
 	else
-		Disable3DRenderingState = false
-		Disable3DRenderingButton.TextColor3 = Color3.new(1, 1, 1)
+		D3RenderingDisabled = false
 		RunService:Set3dRenderingEnabled(true)
+		Disable3DRenderingButton.TextColor3 = Color3.new(1, 1, 1)
 	end
 end
 
-ImproveFPSState = false
-function ImproveFPS()
-	if not ImproveFPSState then
-		ImproveFPSState = true
-		ImproveFPSButton.TextColor3 = Color3.new(0, 1, 0)
-		_G.ImproveFPS = true
-		for _,v in pairs(game:GetDescendants()) do
-			if v:IsA("BasePart") or v:IsA("Decal") then
-				v.Transparency = 1
-			end
-		end
-	else
-		ImproveFPSState = false
-		ImproveFPSButton.TextColor3 = Color3.new(1, 1, 1)
-		_G.ImproveFPS = false
-		for _,v in pairs(game:GetDescendants()) do
-			if v:IsA("BasePart") or v:IsA("Decal") then
-				v.Transparency = 0
-			end
-		end
-	end
-end
-
-CoinType = "Candy"
-function ToggleCoinType()
-	if CoinType == "Candy" then
-		CoinType = "Coin"
-		CoinTypeButton.Text = "Farm coin type: Coin"
-	else
-		CoinType = "Candy"
-		CoinTypeButton.Text = "Farm coin type: Candy"
-	end
-end
-
--- Noclip functionality
-NoclipState = false
-function Noclip()
-    local character = Player.Character
-    if character then
-        for _, part in pairs(character:GetDescendants()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = false
-            end
-        end
-    end
-end
-
-function NoclipToggle()
-    if not NoclipState then
-        NoclipState = true
-        RunService.Stepped:Connect(Noclip)
-    else
-        NoclipState = false
-        -- Optionally disconnect the noclip function if necessary
-    end
-end
-
-function FarmCoins()
-	while AutofarmStarted do
-		-- Look for coins or candy depending on CoinType
-		local coins = workspace:FindFirstChild(CoinType)
-		if coins then
-			for _, coin in pairs(coins:GetChildren()) do
-				-- Move to the coin smoothly using tweening
-				local humanoidRootPart = Player.Character:FindFirstChild("HumanoidRootPart")
-				if humanoidRootPart then
-					local goal = {}
-					goal.Position = coin.Position
-
-					local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-					local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
-					tween:Play()
-
-					-- Wait for the tween to finish
-					tween.Completed:Wait()
-
-					-- Simulate collecting the coin
-					CoinCollectedEvent:FireServer(coin)
+ImproveFPSenabled = false
+function ImproveFPSButtonC()
+	if not ImproveFPSenabled then
+		ImproveFPSenabled = true
+		for _, player in pairs(Players:GetChildren()) do
+			if player.Character then
+				for _, part in pairs(player.Character:GetChildren()) do
+					if part:IsA("Accessory") then
+						part:Destroy()
+					end
+					if part.Name == "Radio" then
+						part:Destroy()
+					end
 				end
-				wait(SettingsAutofarm.DelayFarm)
 			end
 		end
-		wait(1) -- Wait between each cycle to avoid overload
+		ImproveFPSButton.TextColor3 = Color3.new(0, 1, 0)
+	else
+		ImproveFPSenabled = false
+		ImproveFPSButton.TextColor3 = Color3.new(1, 1, 1)
 	end
 end
 
--- Event listeners
-CloseMainFrameButton.MouseButton1Click:Connect(function()
-	MainGui:Destroy()
-	_G.AutoFarmMM2IsLoaded = false
+CoinTypes = {"Candy", "Coin"}
+CurrentCoinType = "Candy"
+PositionOfCoinType = 1
+function ChangeBeachballType(cointype)
+	if cointype then
+		if table.find(CoinTypes, cointype) then
+			CurrentCoinType = cointype
+			PositionOfCoinType = table.find(CoinTypes, cointype)
+			CoinTypeButton.Text = "Farm coin type: "..cointype
+			return
+		end
+		return
+	end
+	if PositionOfCoinType ~= table.maxn(CoinTypes) then
+		PositionOfCoinType += 1
+		CoinTypeButton.Text = "Farm coin type: "..CoinTypes[PositionOfCoinType]
+		CurrentCoinType = CoinTypes[PositionOfCoinType]
+	else
+		PositionOfCoinType = 1
+		CoinTypeButton.Text = "Farm coin type: "..CoinTypes[PositionOfCoinType]
+		CurrentCoinType = CoinTypes[PositionOfCoinType]
+	end
+end
+
+function CloseGuiCheck()
+	if MainFrame.Visible == true then
+		OpenAutofarmGui.Visible = true
+		MainFrame.Visible = false
+		MainFrameBorder.Visible = false
+	else
+		MainFrame.Visible = true
+		MainFrameBorder.Visible = true
+		OpenAutofarmGui.Visible = false
+	end
+end
+
+AutofarmDelay = 3
+ResetWhenFullBag = false
+AutofarmIN = false
+bringpose = CFrame.new(math.random(-5, 5), -100, math.random(-5, 5)) --nvm
+safepart = Instance.new("Part")
+safepart.Anchored = true
+safepart.Massless = true
+safepart.Transparency = 1
+safepart.Size = Vector3.new(2048, 0.5, 2048)
+safepart.CFrame = bringpose * CFrame.new(0, -0.9, 0)
+safepart.Parent = workspace
+
+function returncoincontaier()
+	for _, v in workspace:GetChildren() do
+		if v:FindFirstChild("CoinContainer") and v:IsA("Model") then
+			return v:FindFirstChild("CoinContainer")
+		end
+	end
+	return false
+end
+
+CoinCollectedEvent.OnClientEvent:Connect(function(cointype, current, max)
+	AutofarmIN = true
+	if cointype == CurrentCoinType and tonumber(current) == tonumber(max) then
+		AutofarmIN = false
+		if ResetWhenFullBag then
+			Player.Character.Humanoid.Health = 0
+		end
+	end
 end)
 
+function PcallTP(Position)
+	if Player.Character then
+		if Player.Character:FindFirstChild("HumanoidRootPart") then
+			Player.Character.HumanoidRootPart.CFrame = Position
+		end
+	end
+end
+
+--yes yes autofarm using loops, but its still nice
+spawn(function()
+	while true do
+		if AutofarmStarted and AutofarmIN and Player.Character and returncoincontaier() then
+			PcallTP(bringpose)
+			for _, v in pairs(returncoincontaier():GetChildren()) do
+				if v:GetAttribute("CoinID") == CurrentCoinType and v:FindFirstChild("TouchInterest") then
+					for i = 1,7 do
+						PcallTP(v.CFrame)
+						task.wait(0.03)
+					end
+					break
+				end
+			end
+			PcallTP(bringpose)
+		end
+		task.wait(AutofarmDelay)
+	end
+end)
+
+RoundStartEvent.OnClientEvent:Connect(function()
+	if AutofarmStarted then Player.Character.HumanoidRootPart.CFrame = bringpose end
+	AutofarmIN = true
+end)
+
+RoundEndEvent.OnClientEvent:Connect(function()
+	AutofarmIN = false
+end)
+
+--Improve fps connections:
+for _, player1 in pairs(Players:GetChildren()) do
+	player1.CharacterAdded:Connect(function(char)
+		task.wait(0.5) --just because
+		if ImproveFPSenabled then
+			for _, part in pairs(char:GetChildren()) do
+				if part:IsA("Accessory") then
+					part:Destroy()
+				end
+				if part.Name == "Radio" then
+					part:Destroy()
+				end
+			end
+		end
+	end)
+end
+
+Players.PlayerAdded:Connect(function(player1)
+	player1.CharacterAdded:Connect(function(char)
+		task.wait(0.5) --just because
+		if ImproveFPSenabled then
+			for _, part in pairs(char:GetChildren()) do
+				if part:IsA("Accessory") then
+					part:Destroy()
+				end
+				if part.Name == "Radio" then
+					part:Destroy()
+				end
+			end
+		end
+	end)
+end)
+
+--Buttons connections
 AntiAfkButton.MouseButton1Click:Connect(AntiAFKButton)
-StartAutofarmButton.MouseButton1Click:Connect(StartAutofarm)
-Disable3DRenderingButton.MouseButton1Click:Connect(Disable3DRendering)
-ImproveFPSButton.MouseButton1Click:Connect(ImproveFPS)
-CoinTypeButton.MouseButton1Click:Connect(ToggleCoinType)
-OpenAutofarmGui.MouseButton1Click:Connect(function()
-	MainGui.Enabled = not MainGui.Enabled
-end)
+ImproveFPSButton.MouseButton1Click:Connect(ImproveFPSButtonC)
+StartAutofarmButton.MouseButton1Click:Connect(StartAutofarmButtonC)
+Disable3DRenderingButton.MouseButton1Click:Connect(Disabl3dRender)
+CoinTypeButton.MouseButton1Click:Connect(ChangeBeachballType)
+CloseMainFrameButton.MouseButton1Click:Connect(CloseGuiCheck)
+OpenAutofarmGui.MouseButton1Click:Connect(CloseGuiCheck)
 
--- Start with GUI hidden, can be toggled by the OpenAutofarmGui button
-MainGui.Enabled = false
-
--- Anti-AFK start by default
-AntiAFK()
-
--- Prevent multiple script instances
-_G.AutoFarmMM2IsLoaded = true
-
+--Configs
+for Configname, Configvalue in pairs(SettingsAutofarm) do
+	if Configname == "AntiAfk" and Configvalue == true then
+		AntiAFKButton()
+	elseif Configname == "DelayFarm" and tonumber(Configvalue) and tonumber(Configvalue) < 8 then
+		AutofarmDelay = tonumber(Configvalue)
+	elseif Configname == "StartAutofarm" and Configvalue == true then
+		StartAutofarmButtonC()
+	elseif Configname == "ImproveFPS" and Configvalue == true then
+		ImproveFPSButtonC()
+	elseif Configname == "Disable3DRendering" and Configvalue == true then
+		Disabl3dRender()
+	elseif Configname == "CoinType" and Configvalue then
+		if Configvalue == "Beachball" then Configvalue = "Candy" end
+		ChangeBeachballType(Configvalue)
+	elseif Configname == "ResetWhenFullBag" and Configvalue == true then
+		ResetWhenFullBag = true
+	end
+end
