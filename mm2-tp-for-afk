@@ -1,12 +1,19 @@
 local teleportPosition = Vector3.new(104, 152, 38)
-local player = game.Players.LocalPlayer  -- Get the local player
-local character = player.Character or player.CharacterAdded:Wait()
+local player = game.Players.LocalPlayer
 
 local function teleportPlayer()
+    local character = player.Character or player.CharacterAdded:Wait()
     if character and character:FindFirstChild("HumanoidRootPart") then
         character.HumanoidRootPart.CFrame = CFrame.new(teleportPosition)
     end
 end
+
+player.CharacterAdded:Connect(function()
+    while true do
+        teleportPlayer()
+        wait(1)
+    end
+end)
 
 while true do
     teleportPlayer()
