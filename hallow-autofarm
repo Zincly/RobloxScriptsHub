@@ -1,0 +1,2 @@
+game:GetService("RunService"):Set3dRenderingEnabled(false)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
