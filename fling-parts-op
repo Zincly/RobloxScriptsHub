@@ -78,8 +78,8 @@ local function ForcePart(v)
         local Attachment2 = Instance.new("Attachment", v)
         Torque.Attachment0 = Attachment2
         AlignPosition.MaxForce = math.huge
-        AlignPosition.MaxVelocity = math.huge
-        AlignPosition.Responsiveness = 500
+        AlignPosition.MaxVelocity = math.huge 
+        AlignPosition.Responsiveness = 500000000
         AlignPosition.Attachment0 = Attachment2
         AlignPosition.Attachment1 = Attachment1
     end
@@ -101,11 +101,11 @@ local function toggleBlackHole()
         spawn(function()
             while blackHoleActive and RunService.RenderStepped:Wait() do
                 angle = angle + math.rad(2)
+                
+                local offsetX = math.cos(angle) * radius + math.random(-2, 2)  -- slight randomness in X
+                local offsetZ = math.sin(angle) * radius + math.random(-2, 2)  -- slight randomness in Z
 
-                local offsetX = math.cos(angle) * radius
-                local offsetZ = math.sin(angle) * radius
-
-                Attachment1.WorldCFrame = humanoidRootPart.CFrame * CFrame.new(offsetX, 0, offsetZ)
+                Attachment1.WorldCFrame = humanoidRootPart.CFrame * CFrame.new(offsetX, offsetY, offsetZ)
             end
         end)
     else
@@ -209,21 +209,20 @@ PlayerSection:AddSlider({
 
 
 
-
-PlayerSection:AddToggle({
-    Name = "Hurricane Mode",
+local hurricaneSection = PlayerTab:AddSection({
+    Name = "Hurricane FE (Mass Destruction with giant objects)"
+})
+local hurricaneToggle = hurricaneSection:AddToggle({
+    Name = "Hurricane Mode (Must Re-Execute to disable)",
     Default = false,
     Callback = function(Value)
         if Value then
             while Value do
-                radius = math.random(25, 100)
-                angleSpeed = math.random(25, 50)
-                task.wait(0.1)
-                if Value == false then
-                    loadstring(game:HttpGet("https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/fling-parts-op"))()
-                end
+                radius = math.random(5, 150)
+                angleSpeed = math.random(10, 25)
+                offsetY = math.random(-20, 35)
+                task.wait(0.05)
             end
-
         end
     end    
 })
@@ -231,8 +230,33 @@ PlayerSection:AddToggle({
 
 
 
+local tornadoSection = PlayerTab:AddSection({
+    Name = "Tornado FE (Works best with Larger objects)"
+})
+
+
+
+local tornadoToggle = tornadoSection:AddToggle({
+    Name = "Tornado Mode (Crictial with large objects.)",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            while Value do
+                radius = math.random(1, 37.5)
+                angleSpeed = 17.5
+                offsetY = math.random(-15, 75) 
+                task.wait(0.01)
+            end
+        end
+    end    
+})
+
+
+
+
+
 PlayerSection:AddToggle({
-    Name = "Blackhole",
+    Name = "Blackhole (Most Effective)",
     Default = false,
     Callback = function(Value)
         if Value then
