@@ -219,10 +219,11 @@ PlayerSection:AddToggle({
                 radius = math.random(25, 100)
                 angleSpeed = math.random(25, 50)
                 task.wait(0.1)
+                if Value == false then
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/fling-parts-op"))()
+                end
             end
-        else
 
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/fling-parts-op"))()
         end
     end    
 })
