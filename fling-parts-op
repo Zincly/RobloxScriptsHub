@@ -56,7 +56,7 @@ local humanoidRootPart, Attachment1 = setupPlayer()
 if not getgenv().Network then
     getgenv().Network = {
         BaseParts = {},
-        Velocity = Vector3.new(14.46262424, 14.46262424, 14.46262424)
+        Velocity = Vector3.new(15.46262424, 15.46262424, 15.46262424)
     }
 
     Network.RetainPart = function(part)
@@ -103,13 +103,13 @@ local function ForcePart(v)
 
 
         local Torque = Instance.new("Torque", v)
-        Torque.Torque = Vector3.new(1000000, 1000000, 1000000)
+        Torque.Torque = Vector3.new(100000, 100000, 100000)
         local AlignPosition = Instance.new("AlignPosition", v)
         local Attachment2 = Instance.new("Attachment", v)
         Torque.Attachment0 = Attachment2
         AlignPosition.MaxForce = math.huge
         AlignPosition.MaxVelocity = math.huge 
-        AlignPosition.Responsiveness = 500000000
+        AlignPosition.Responsiveness = 50000
         AlignPosition.Attachment0 = Attachment2
         AlignPosition.Attachment1 = Attachment1
     end
@@ -134,8 +134,9 @@ local function toggleBlackHole()
             while blackHoleActive and RunService.RenderStepped:Wait() do
                 angle = angle + math.rad(2)
                 
-                local offsetX = math.cos(angle) * radius + math.random(-2, 2) 
-                local offsetZ = math.sin(angle) * radius + math.random(-2, 2)
+                local offsetX = math.cos(angle) * radius + math.random(-3, 3) 
+                local offsetZ = math.sin(angle) * radius + math.random(-3, 3)
+                local offsetY = math.sin(angle) * radius + math.random(-3, 3)
 
                 Attachment1.WorldCFrame = humanoidRootPart.CFrame * CFrame.new(offsetX, offsetY, offsetZ)
             end
