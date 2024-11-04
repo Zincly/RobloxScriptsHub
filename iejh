@@ -248,9 +248,14 @@ if game.PlaceId == 15740639668 then
         end
     end,
 })
+
 PlayerTab:CreateButton({
     Name = "TP to Bridge",
     Callback = function()
+        if Player5.Character and Player5.Character:FindFirstChild("HumanoidRootPart") then
+            Player5.Character.HumanoidRootPart.CFrame = CFrame.new(-508, -247, -656)
+        end
+        wait(2)
         if Player5.Character and Player5.Character:FindFirstChild("HumanoidRootPart") then
             Player5.Character.HumanoidRootPart.CFrame = CFrame.new(114, 10, -694)
         end
