@@ -1,0 +1,270 @@
+
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+
+
+local angle = 1
+local radius = 1
+local blackHoleActive = false
+
+local function setupPlayer()
+    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    local Folder = Instance.new("Folder", Workspace)
+    local Part = Instance.new("Part", Folder)
+    local Attachment1 = Instance.new("Attachment", Part)
+    Part.Anchored = true
+    Part.CanCollide = false
+    Part.Transparency = 0
+    
+
+    return humanoidRootPart, Attachment1
+end
+
+local humanoidRootPart, Attachment1 = setupPlayer()
+
+if not getgenv().Network then
+    getgenv().Network = {
+        BaseParts = {},
+        Velocity = Vector3.new(14.46262424, 14.46262424, 14.46262424)
+    }
+
+    Network.RetainPart = function(part)
+        if typeof(part) == "Instance" and part:IsA("BasePart") and part:IsDescendantOf(Workspace) then
+            table.insert(Network.BaseParts, part)
+            part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+            part.CanCollide = false
+        end
+    end
+
+    local function EnablePartControl()
+        LocalPlayer.ReplicationFocus = Workspace
+        RunService.Heartbeat:Connect(function()
+            sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+            for _, part in pairs(Network.BaseParts) do
+                if part:IsDescendantOf(Workspace) then
+                    part.Velocity = Network.Velocity
+                end
+            end
+        end)
+    end
+
+    EnablePartControl()
+end
+
+local function ForcePart(v)
+    if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") and not v.Parent:FindFirstChild("Head") and v.Name ~= "Handle" then
+        for _, x in next, v:GetChildren() do
+            if x:IsA("BodyAngularVelocity") or x:IsA("BodyForce") or x:IsA("BodyGyro") or x:IsA("BodyPosition") or x:IsA("BodyThrust") or x:IsA("BodyVelocity") or x:IsA("RocketPropulsion") then
+                x:Destroy()
+            end
+        end
+        if v:FindFirstChild("Attachment") then
+            v:FindFirstChild("Attachment"):Destroy()
+        end
+        if v:FindFirstChild("AlignPosition") then
+            v:FindFirstChild("AlignPosition"):Destroy()
+        end
+        if v:FindFirstChild("Torque") then
+            v:FindFirstChild("Torque"):Destroy()
+        end
+        v.CanCollide = false
+        
+
+
+        local Torque = Instance.new("Torque", v)
+        Torque.Torque = Vector3.new(1, 1, 1)
+        local AlignPosition = Instance.new("AlignPosition", v)
+        local Attachment2 = Instance.new("Attachment", v)
+        Torque.Attachment0 = Attachment2
+        AlignPosition.MaxForce = math.huge
+        AlignPosition.MaxVelocity = math.huge 
+        AlignPosition.Responsiveness = 1
+        AlignPosition.Attachment0 = Attachment2
+        AlignPosition.Attachment1 = Attachment1
+    end
+end
+
+
+
+local function toggleBlackHole()
+    blackHoleActive = not blackHoleActive
+    if blackHoleActive then
+        for _, v in next, Workspace:GetDescendants() do
+            ForcePart(v)
+        end
+
+        Workspace.DescendantAdded:Connect(function(v)
+            if blackHoleActive then
+                ForcePart(v)
+            end
+        end)
+
+        spawn(function()
+            while blackHoleActive and RunService.RenderStepped:Wait() do
+                angle = angle + math.rad(2)
+                
+                local offsetX = math.cos(angle) * radius + math.random(1, 1.1) 
+                local offsetZ = math.sin(angle) * radius + math.random(1, 1.1)
+
+                Attachment1.WorldCFrame = humanoidRootPart.CFrame * CFrame.new(offsetX, offsetY, offsetZ)
+            end
+        end)
+    else
+        Attachment1.WorldCFrame = CFrame.new(0, -1000, 0)
+    end
+end
+
+LocalPlayer.CharacterAdded:Connect(function()
+    humanoidRootPart, Attachment1 = setupPlayer()
+    if blackHoleActive then
+        toggleBlackHole()
+    end
+end)
+
+
+
+
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "RSC - Destruction Menu (BETA)",
+   LoadingTitle = "Destruction Menu (BETA)",
+   LoadingSubtitle = "by RSC-Hub (Sirius UI)",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil,
+      FileName = "RSC-Destruction"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink",
+      RememberJoins = true
+   },
+   KeySystem = true,
+   KeySettings = {
+      Title = "RSC - Destructive FE (BETA)",
+      Subtitle = "Key System",
+      Note = "Key is provided by the Developer of the Script.",
+      FileName = "Key",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"RSCdestrutiveKey5580PRIVATESTAFFKEY"}
+   }
+})
+
+local PlayerTab = Window:CreateTab("Main", 4483362458)
+
+
+
+local PlayerSection1 = PlayerTab:CreateSection("FE - THIS IS IN BETA SO THERE WILl BE BUGS")
+
+local Button = PlayerTab:CreateButton({
+   Name = "Execute | Inf Yield",
+   Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+   end,
+})
+
+local WalkSpeedSlider = PlayerTab:CreateSlider({
+   Name = "Change Walkspeed",
+   Range = {16, 150},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 1,
+   Flag = "Slider1",
+   Callback = function(Value)
+                local speaker = game.Players.LocalPlayer
+        local Char = speaker.Character or workspace:FindFirstChild(speaker.Name)
+        local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
+
+        if Char and Human then
+            Human.WalkSpeed = Value
+        end
+
+        HumanModCons = HumanModCons or {}
+        HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if Human then
+                Human.WalkSpeed = Value
+            end
+        end)
+
+        HumanModCons.wsCA = (HumanModCons.wsCA and HumanModCons.wsCA:Disconnect() and false) or speaker.CharacterAdded:Connect(function(nChar)
+            Char, Human = nChar, nChar:WaitForChild("Humanoid")
+            Human.WalkSpeed = Value
+            HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+                if Human then
+                    Human.WalkSpeed = Value
+                end
+            end)
+        end)
+   end,
+})
+
+
+
+local PlayerSection2 = PlayerTab:CreateSection("Blackhole FE (Bring Parts)")
+local Paragraph = PlayerTab:CreateParagraph({Title = "Info", Content = "This is soft verison of the BlackHole we made. If you don't like this then switch over to the Main Verison of the script."})
+
+local blackHoleToggle = PlayerTab:CreateToggle({
+   Name = "Blackhole FE (Most Effective)",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(Value)
+        if Value then
+            toggleBlackHole()
+        else
+            blackHoleActive = false
+            offsetY = 0
+        end
+   end,
+})
+
+
+
+local PlayerSection2 = PlayerTab:CreateSection("Want to switch over to OP Blackhole?")
+local Button = PlayerTab:CreateButton({
+   Name = "Switch to Main BlackHole| RSC Destructive FE (Beta)",
+   Callback = function()
+        blackHoleActive = false
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/fling-parts-op"))()
+   end,
+})
+
+
+if game.PlaceId == 15740639668 then
+    local Player5 = game.Players.LocalPlayer
+    PlayerTab:CreateSection("LTM - Special features")
+    PlayerTab:CreateButton({
+    Name = "TP to Flame Island",
+    Callback = function()
+        if Player5.Character and Player5.Character:FindFirstChild("HumanoidRootPart") then
+            Player5.Character.HumanoidRootPart.CFrame = CFrame.new(-1491, -248, 288)
+        end
+    end,
+})
+PlayerTab:CreateButton({
+    Name = "TP to Bridge",
+    Callback = function()
+        if Player5.Character and Player5.Character:FindFirstChild("HumanoidRootPart") then
+            Player5.Character.HumanoidRootPart.CFrame = CFrame.new(114, 10, -694)
+        end
+    end,
+})
+end
+
+spawn(function()
+    while true do
+        RunService.RenderStepped:Wait()
+        if blackHoleActive then
+            angle = angle + math.rad(angleSpeed)
+        end
+    end
+end)
+
+
