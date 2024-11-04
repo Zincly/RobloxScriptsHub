@@ -1,4 +1,7 @@
 
+if game.PlaceId == 15740639668 then
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/LTM-DETECT'))()
+end
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
