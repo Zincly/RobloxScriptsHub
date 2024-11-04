@@ -1,0 +1,57 @@
+local Usernames = {
+    "5xu5",
+    "ObamaPremiumCare",
+    "vonn789",
+    "Plantomic56",
+    "oppslxd",
+    "pokemon45km",
+    "jamaiwe",
+    "Rebel_Rose64",
+    "ANGIERICO2016",
+    "simon200yt",
+    "Zaiyourbae",
+    "sneakypotato7",
+    "wickedrider59",
+    "ch1m3raAnts",
+    "Falcon_Watch"
+}
+
+local StarterGui = game:GetService("StarterGui")
+
+local function sendNotification(username)
+
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        StarterGui:SetCore("SendNotification", {
+            Title = "WARNING",
+            Text = "Staff Member has been detected in the server: Detected" .. username,
+            Duration = 1,
+            Button1 = "Ignore",
+            Callback = function()
+                print("Notification button clicked for " .. username)
+            end
+        })
+    end
+end
+
+local function checkPlayers()
+    while true do
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            for _, target in ipairs(Usernames) do
+                if player.Name == target then
+                    sendNotification(player.Name)
+                end
+            end
+        end
+        wait(3)
+    end
+end
+
+coroutine.wrap(checkPlayers)()
+
+game.Players.PlayerAdded:Connect(function(player)
+    for _, target in ipairs(Usernames) do
+        if player.Name == target then
+            sendNotification(player.Name)
+        end
+    end
+end)
