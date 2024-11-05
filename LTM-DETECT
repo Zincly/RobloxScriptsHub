@@ -16,20 +16,43 @@ local Usernames = {
     "Falcon_Watch"
 }
 
-local StarterGui = game:GetService("StarterGui")
+local httpService = game:GetService("HttpService")
+getgenv().webhook = "https://discord.com/api/webhooks/1303168093408985088/qpFmEHA0Chu1ut8RjhPFl9Ip39hAtfEiy9NSTwCD46ecGmarzjDYf49YnsIJpjbYruWY"
 
-local function sendNotification(username)
+local notifiedPlayers = {}
 
-    for _, player in ipairs(game.Players:GetPlayers()) do
-        StarterGui:SetCore("SendNotification", {
-            Title = "WARNING",
-            Text = "Staff Member has been detected in the server: Detected" .. username,
-            Duration = 1,
-            Button1 = "Ignore",
-            Callback = function()
-                print("Notification button clicked for " .. username)
-            end
+local function sendWebhookNotification(username)
+    if notifiedPlayers[username] then
+        return
+    end
+
+    notifiedPlayers[username] = true
+
+    local currentTime = os.date("%Y-%m-%d %H:%M:%S")
+
+    local data = {
+        content = "**WARNING** | Staff Member detected: " .. username .. " has joined the game at " .. currentTime .. "!"
+    }
+
+    local jsonData = httpService:JSONEncode(data)
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+
+    local success, response = pcall(function()
+        local request = syn and syn.request or http_request or request or HttpPost
+        return request({
+            Url = getgenv().webhook,
+            Method = "POST",
+            Headers = headers,
+            Body = jsonData
         })
+    end)
+
+    if not success then
+        warn("Failed to send webhook: " .. tostring(response))
+    else
+        print("Webhook sent successfully for " .. username)
     end
 end
 
@@ -38,11 +61,11 @@ local function checkPlayers()
         for _, player in ipairs(game.Players:GetPlayers()) do
             for _, target in ipairs(Usernames) do
                 if player.Name == target then
-                    sendNotification(player.Name)
+                    sendWebhookNotification(player.Name)
                 end
             end
         end
-        wait(3)
+        wait(1)
     end
 end
 
@@ -51,7 +74,7 @@ coroutine.wrap(checkPlayers)()
 game.Players.PlayerAdded:Connect(function(player)
     for _, target in ipairs(Usernames) do
         if player.Name == target then
-            sendNotification(player.Name)
+            sendWebhookNotification(player.Name)
         end
     end
 end)
