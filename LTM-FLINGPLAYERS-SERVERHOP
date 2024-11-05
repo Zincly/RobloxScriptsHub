@@ -138,7 +138,7 @@ local function toggleBlackHole()
                     Attachment1.WorldCFrame = randomHRP.CFrame  -- Set to the CFrame of the chosen HumanoidRootPart
                 end
 
-                wait(0.75)
+                wait(0.15)
             end
         end)
     else
