@@ -2,7 +2,7 @@ wait(7.5)
 Players.LocalPlayer.OnTeleport:Connect(function()
     queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/LTM-FLINGPLAYERS-SERVERHOP'))()")
 end)
-print('v1.4')
+print('v1.5')
 game.Players.LocalPlayer.Character:MoveTo(Vector3.new(299, 9, 40))
 
 local Players = game:GetService("Players")
