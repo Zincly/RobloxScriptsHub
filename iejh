@@ -249,7 +249,7 @@ if game.PlaceId == 15740639668 then
         if Player5.Character and Player5.Character:FindFirstChild("HumanoidRootPart") then
             local humanoidRootPart = Player5.Character.HumanoidRootPart
             local tweenInfo = TweenInfo.new(
-                (humanoidRootPart.Position - targetPosition).Magnitude / 500,
+                (humanoidRootPart.Position - targetPosition).Magnitude / 275,
                 Enum.EasingStyle.Linear,
                 Enum.EasingDirection.Out
             )
