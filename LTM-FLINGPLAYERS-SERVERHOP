@@ -1,8 +1,8 @@
-wait(6)
+wait(7.5)
 Players.LocalPlayer.OnTeleport:Connect(function()
     queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/LTM-FLINGPLAYERS-SERVERHOP'))()")
 end)
-print('v1.8')
+print('v1.7')
 
 
 local Players = game:GetService("Players")
@@ -154,12 +154,28 @@ end)
 
 toggleBlackHole()
 
+
+
+
+local function checkPlayers()
+    local players = game.Players:GetPlayers()
+    local localPlayer = game.Players.LocalPlayer
+    
+    if #players == 1 and players[1] == localPlayer then
+        serverHop()
+    end
+end
+
+game.Players.PlayerRemoving:Connect(function()
+    wait(0.1)
+    checkPlayers()
+end)
+
+checkPlayers()
+
+
+
 while true do
     wait(0.01)
     game.Players.LocalPlayer.Character:MoveTo(Vector3.new(302, -23, 41))
 end
-
-wait(75)
-serverHop()
-
-
