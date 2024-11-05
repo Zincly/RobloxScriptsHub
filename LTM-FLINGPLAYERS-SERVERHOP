@@ -1,15 +1,15 @@
 wait(7.5)
-Players.LocalPlayer.OnTeleport:Connect(function()
-    queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/LTM-FLINGPLAYERS-SERVERHOP'))()")
-end)
-print('v1.7')
+
+print('v1.8')
 
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 local Workspace = game:GetService("Workspace")
-
+Players.LocalPlayer.OnTeleport:Connect(function()
+    queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/LTM-FLINGPLAYERS-SERVERHOP'))()")
+end)
 local angle = 1
 local radius = 1
 local blackHoleActive = false
