@@ -1,3 +1,4 @@
+wait(7.5)
 Players.LocalPlayer.OnTeleport:Connect(function()
     queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RSC-HUB/RobloxScriptsHub/refs/heads/main/LTM-FLINGPLAYERS-SERVERHOP'))()")
 end)
