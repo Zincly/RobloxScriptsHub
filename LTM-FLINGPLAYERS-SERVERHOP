@@ -156,5 +156,20 @@ toggleBlackHole()
 
 
 
-wait(50)
-serverHop()
+
+local function checkPlayers()
+    local players = game.Players:GetPlayers()
+    local localPlayer = game.Players.LocalPlayer
+    
+    if #players == 1 and players[1] == localPlayer then
+        serverHop()
+    end
+end
+
+game.Players.PlayerRemoving:Connect(function()
+    wait(0.1)
+    checkPlayers()
+end)
+
+checkPlayers()
+
