@@ -160,9 +160,22 @@ toggleBlackHole()
 local function checkPlayers()
     local players = game.Players:GetPlayers()
     local localPlayer = game.Players.LocalPlayer
-    
+    local specificUserName = "sudfhweurf"
+    local specificUserFound = false
+
     if #players == 1 and players[1] == localPlayer then
         serverHop()
+    elseif #players == 2 then
+        for _, player in ipairs(players) do
+            if player.Name == specificUserName then
+                specificUserFound = true
+                break
+            end
+        end
+
+        if specificUserFound and (players[1] == localPlayer or players[2] == localPlayer) then
+            serverHop()
+        end
     end
 end
 
@@ -172,6 +185,7 @@ game.Players.PlayerRemoving:Connect(function()
 end)
 
 checkPlayers()
+
 
 
 
