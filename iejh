@@ -165,7 +165,7 @@ local PlayerTab = Window:CreateTab("Main", 4483362458)
 
 
 
-local PlayerSection1 = PlayerTab:CreateSection("FE - THIS IS IN BETA SO THERE WILl BE BUGS")
+local PlayerSection1 = PlayerTab:CreateSection("FE - V1.2")
 
 local Button = PlayerTab:CreateButton({
    Name = "Execute | Inf Yield",
